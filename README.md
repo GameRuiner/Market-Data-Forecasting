@@ -22,3 +22,7 @@ Notebook includes
 - Feature importance analysis
 - Model selection process
 - Parameter tuning
+
+## Model training
+
+`train.py` consits final model training.
