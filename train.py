@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 
 import glob
-import joblib 
+import pickle 
 
 def reduce_mem_usage(df, float16_as32=True):
     start_mem = df.memory_usage().sum() / 1024**2
@@ -89,5 +89,5 @@ if __name__ == "__main__":
                 lgb.log_evaluation(10)
             ]         
     )
-
-    joblib.dump(model, './final_model.model')
+    file = open("./web_service/final_model.bin", "wb")
+    pickle.dump(model, file)
