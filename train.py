@@ -61,15 +61,6 @@ if __name__ == "__main__":
     partitions_to_read = 2
     df = pd.concat([pd.read_parquet(partitions[i]) for i in range(partitions_to_read)], ignore_index=True)
     reduce_mem_usage(df, False)
-
-    df = df.fillna(0)
-    columns_with_missing_values = df.columns[df.isnull().any()]
-
-    for feature in feature_names:
-        lower_bound = df[feature].quantile(0.05)
-        upper_bound = df[feature].quantile(0.95)
-        df[feature] = np.where(df[feature] < lower_bound, lower_bound, df[feature])
-        df[feature] = np.where(df[feature] > upper_bound, upper_bound, df[feature])
     
     dates = df['date_id'].unique()
     n = len(dates)
